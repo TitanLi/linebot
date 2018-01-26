@@ -1,3 +1,4 @@
+//https://floating-journey-18009.herokuapp.com/msg?message=%E4%BD%A0%E8%B6%85%E6%A3%92
 var linebot = require('linebot');
 var express = require('express');
 var request = require('request');
@@ -12,9 +13,15 @@ var bot = linebot({
 
 var msg;
 var data;
+var userData;
+var dataAry = new Array()
 
 bot.on('message', function(event) {
   msg=event.message.text;
+  userData=event;
+  dataAry.push({name:event.source.userId,
+                text:event.message.text,
+                time:new Date()});
   console.log(event); //把收到訊息的 event 印出來看看
   if(msg=='哈囉'){
     event.reply({ type: 'text', text: '哈囉' });
@@ -48,7 +55,18 @@ const linebotParser = bot.parser();
 
 app.post('/', linebotParser);
 app.get('/msg',function(req,res){
-  res.send(msg);
+  res.send(userData.source.userId);
+  bot.push(userData.source.userId,req.query.message);
+  dataAry.push({name:userData.source.userId,
+                text:req.query.message,
+                time:new Date()});
+});
+app.get('/data',function(req,res){
+  res.send(dataAry);
+});
+app.get('/clean',function(req,res){
+  dataAry = [];
+  res.send('ok');
 });
 
 // //因為 express 預設走 port 3000，而 heroku 上預設卻不是，要透過下列程式轉換
