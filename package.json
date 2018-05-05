@@ -4,7 +4,8 @@
   "description": "API模式： * Developer trial帳號可免費使用Reply API與Push API（目前採用測試） * 其餘開啟API功能的LINE@帳號皆可免費使用Reply API",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,15 @@
   "bugs": {
     "url": "https://github.com/TitanLi/linebot/issues"
   },
-  "homepage": "https://github.com/TitanLi/linebot#readme"
+  "homepage": "https://github.com/TitanLi/linebot#readme",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "dotenv": "^5.0.1",
+    "koa": "^2.5.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2"
+  }
 }
