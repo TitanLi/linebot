@@ -16,48 +16,25 @@ const router = Router();
 //lineBot library 實作
 const channelSecret = process.env.channelSecret;
 const lineBotToken = process.env.lineBotToken;
-const linebot = new lineBot(channelSecret);
+const linebot = new lineBot(channelSecret,lineBotToken);
+
+var userId = '';
 
 app.use(logger());
 app.use(bodyparser());
 
 router.get('/',async (ctx) => {
-  ctx.body = 'ok';
+  let data = await linebot.getProfile(userId);
+  ctx.body = data;
 });
 
 router.post('/webhooks',async (ctx) => {
-  userMessages = ctx.request.body.events;
-  if(ctx.status == 200){
-    let replyToken,type,sourceType,userId,messageType,text;
-    userMessages.map(function(item, index, array){
-      replyToken = item.replyToken;
-      type = item.type;
-      sourceType = item.source.sourceType;
-      userId = item.source.userId;
-      messageType = item.message.messageType;
-      text = item.message.text;
-    });
-    let options = {
-            method: 'POST',
-            uri: 'https://api.line.me/v2/bot/message/reply',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${lineBotToken}`
-            },
-            body: {
-              replyToken: replyToken,
-              messages: [{
-                  type: "text",
-                  text: text
-                }]
-            },
-            json: true
-          }
-    await request(options);
-    ctx.body = 'ok';
-  }else {
-    ctx.body = 'hash error';
-  }
+  let events = linebot.requireHandle(ctx);
+  userId = events.sourceUserId;
+  await linebot.responseText(events,{
+                              '哈囉':'你好阿',
+                              '晚安':'晚安'
+                             });
 });
 
 app
