@@ -1,37 +1,19 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.2.6",
-  "description": "A sample Node.js app using Express 4",
-  "engines": {
-    "node": "6.11.1"
-  },
-  "main": "index.js",
+  "name": "linebot",
+  "version": "1.0.0",
+  "description": "API模式： * Developer trial帳號可免費使用Reply API與Push API（目前採用測試） * 其餘開啟API功能的LINE@帳號皆可免費使用Reply API",
+  "main": "app.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "node test.js"
-  },
-  "dependencies": {
-    "body-parser": "^1.18.2",
-    "co": "^4.6.0",
-    "ejs": "2.5.6",
-    "express": "4.15.2",
-    "koa": "^1.4.1",
-    "koa-router": "^1.6.1",
-    "linebot": "^1.3.0",
-    "request": "^2.83.0"
-  },
-  "devDependencies": {
-    "request": "^2.81.0",
-    "tape": "^4.7.0"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "git+https://github.com/TitanLi/linebot.git"
   },
-  "keywords": [
-    "node",
-    "heroku",
-    "express"
-  ],
-  "license": "MIT"
+  "author": "Titan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TitanLi/linebot/issues"
+  },
+  "homepage": "https://github.com/TitanLi/linebot#readme"
 }
