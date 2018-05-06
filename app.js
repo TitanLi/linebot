@@ -5,7 +5,7 @@ const bodyparser = require('koa-bodyparser');
 // const co = require('co');
 const dotenv = require('dotenv').load();
 // 送 Request 用 ( 也要安裝 request package )
-const request = require('request-promise');
+// const request = require('request-promise');
 // 載入 crypto ，等下要加密
 // const crypto = require('crypto');
 // 使用linebot library
@@ -29,7 +29,7 @@ router.get('/',async (ctx) => {
 });
 
 router.post('/webhooks',async (ctx) => {
-  let events = linebot.requireHandle(ctx);
+  let events = linebot.requestHandle(ctx);
   userId = events.sourceUserId;
   await linebot.responseText(events,{
                               '哈囉':'你好阿',
