@@ -13,10 +13,12 @@
   "dependencies": {
     "crypto": "^1.0.1",
     "dotenv": "^5.0.1",
+    "fs": "0.0.1-security",
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.0",
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
+    "koa-static": "^4.0.2",
     "request": "^2.85.0",
     "request-promise": "^4.2.2"
   },

@@ -5,9 +5,10 @@ const bodyparser = require('koa-bodyparser');
 // const co = require('co');
 const dotenv = require('dotenv').load();
 // 送 Request 用 ( 也要安裝 request package )
-// const request = require('request-promise');
+const request = require('request-promise');
 // 載入 crypto ，等下要加密
 // const crypto = require('crypto');
+// const serve = require('koa-static');
 // 使用linebot library
 const lineBot = require('./lib/linebot.js');
 
@@ -18,10 +19,12 @@ const channelSecret = process.env.channelSecret;
 const lineBotToken = process.env.lineBotToken;
 const linebot = new lineBot(channelSecret,lineBotToken);
 
-var userId = '';
+var userId = 'Ue1ed1792dfbdbd4ed43f91ad295bbc9d';
+var richMenuId = '';
 
 app.use(logger());
 app.use(bodyparser());
+// app.use(serve(__dirname+'/public/picture'));
 
 router.get('/',async (ctx) => {
   let data = await linebot.getProfile(userId);
@@ -35,6 +38,34 @@ router.post('/webhooks',async (ctx) => {
                               '哈囉':'你好阿',
                               '晚安':'晚安'
                              });
+});
+
+router.get('/create',async (ctx) => {
+    //create rich menu
+    let richMenu = await linebot.createRichMenu(2500,1686,true,'chatBarText',0,0,2500,1686,'message','Yes','Yes apple');
+    richMenuId = richMenu.richMenuId;
+    //upload rich menu image
+    let uploadRichMenuImage = await linebot.uploadRichMenuImage(richMenu.richMenuId,`${__dirname}/public/picture/asd.png`);
+
+    ctx.body = uploadRichMenuImage;
+});
+
+router.get('/richmenutouser',async (ctx) => {
+    //link rich menu to user
+    let linkRichMenuToUser = await linebot.linkRichMenuToUser(userId,richMenuId);
+    ctx.body = linkRichMenuToUser;
+});
+
+router.delete('/delete',async (ctx) => {
+  //get rich menu list
+  let getRichMenuList = await linebot.getRichMenuList();
+  let richmenus = JSON.parse(getRichMenuList).richmenus;
+  let deleteRichMenu;
+  //delete all rich menu
+  for(let i=0;i<richmenus.length;i++){
+    deleteRichMenu = await linebot.deleteRichMenu(richmenus[i].richMenuId);
+  }
+  ctx.body = deleteRichMenu;
 });
 
 app
