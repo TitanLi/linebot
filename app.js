@@ -27,17 +27,17 @@ app.use(bodyparser());
 // app.use(serve(__dirname+'/public/picture'));
 
 router.get('/',async (ctx) => {
-  let data = await linebot.getProfile(userId);
-  ctx.body = data;
+    let data = await linebot.getProfile(userId);
+    ctx.body = data;
 });
 
 router.post('/webhooks',async (ctx) => {
-  let events = linebot.requestHandle(ctx);
-  userId = events.sourceUserId;
-  await linebot.responseText(events,{
-                              '哈囉':'你好阿',
-                              '晚安':'晚安'
-                             });
+    let events = linebot.requestHandle(ctx);
+    userId = events.sourceUserId;
+    await linebot.responseText(events,{
+                                '哈囉':'你好阿',
+                                '晚安':'晚安'
+                              });
 });
 
 router.get('/create',async (ctx) => {
@@ -57,15 +57,25 @@ router.get('/richmenutouser',async (ctx) => {
 });
 
 router.delete('/delete',async (ctx) => {
-  //get rich menu list
-  let getRichMenuList = await linebot.getRichMenuList();
-  let richmenus = JSON.parse(getRichMenuList).richmenus;
-  let deleteRichMenu;
-  //delete all rich menu
-  for(let i=0;i<richmenus.length;i++){
-    deleteRichMenu = await linebot.deleteRichMenu(richmenus[i].richMenuId);
-  }
-  ctx.body = deleteRichMenu;
+    //get rich menu list
+    let getRichMenuList = await linebot.getRichMenuList();
+    let richmenus = JSON.parse(getRichMenuList).richmenus;
+    let deleteRichMenu;
+    //delete all rich menu
+    for(let i=0;i<richmenus.length;i++){
+      deleteRichMenu = await linebot.deleteRichMenu(richmenus[i].richMenuId);
+    }
+    ctx.body = deleteRichMenu;
+});
+
+router.get('/test',async (ctx) => {
+  //send sticker
+  let data = await linebot.sendText(userId,"apple");
+  //let data = await linebot.sendSticker(userId,2,35);
+  // let data = await linebot.sendImage(userId,"https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=","https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=")
+  // let data = await linebot.sendVideo(userId,'https://www.youtube.com/watch?v=i8zi_bL3a2Q','https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=')
+  // let data = await linebot.carouselTemplate(userId);
+  ctx.body = data;
 });
 
 app
