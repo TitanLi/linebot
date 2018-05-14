@@ -6,4 +6,6 @@ API模式：
 
 ![LINE Developers](https://github.com/TitanLi/linebot/blob/master/d7bdff20.png)
 
-[LINE library step 1](https://github.com/TitanLi/linebot/blob/master/library.md)
+[LINE library step](https://github.com/TitanLi/linebot/blob/master/library.md)
+
+[LINE library response use](https://github.com/TitanLi/linebot/blob/master/response.md)
