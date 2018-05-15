@@ -11,7 +11,7 @@
 | boundsWidth | Int     | Width of the area                                               |
 | boundsHeight| Int     | Height of the area                                              |
 | actionType  | String  | postback or message or uri or datetimepicker                    |
-| actionLabel | String  | Label for the action<br>Required for templates other than image carousel. Max: 20 characters<br>Optional for image carousel templates. Max: 12 characters<br>Optional for rich menus. Spoken when the accessibility feature is enabled on the client device. Max: 20 characters.<br>Supported on LINE iOS version 8.2.0 and later   |
+| actionLabel | String  | Label for the action:<br>-Required for templates other than image carousel. Max: 20 characters<br>-Optional for image carousel templates. Max: 12 characters<br>-Optional for rich menus. Spoken when the accessibility feature is enabled on the client device. Max: 20 characters<br>-Supported on LINE iOS version 8.2.0 and later|
 | actionText  | String  | Text sent when the action is performed Max: 300 characters      |
 
 **return** request-promise
