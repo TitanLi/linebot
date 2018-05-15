@@ -11,3 +11,5 @@ API模式：
 [LINE library response use](https://github.com/TitanLi/linebot/blob/master/response.md)
 
 [LINE library send use](https://github.com/TitanLi/linebot/blob/master/send.md)
+
+[LINE library rich use](https://github.com/TitanLi/linebot/blob/master/rich.md)
