@@ -20,6 +20,7 @@ router.get('/send',async (ctx) => {
 ***
 ## send sticker
 [sticker_list]( https://developers.line.me/media/messaging-api/sticker_list.pdf)
+
 | property   | Type   | Description |
 | -----------|:------:| :-----------|
 | userId     | String | user id     |
