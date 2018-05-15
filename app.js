@@ -66,46 +66,46 @@ router.delete('/delete',async (ctx) => {
 });
 
 router.get('/test',async (ctx) => {
-  //send sticker
-  // let data = await linebot.sendText(userId,"apple");
-  //let data = await linebot.sendSticker(userId,2,35);
-  // let data = await linebot.sendImage(userId,"https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=","https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=")
-  // let data = await linebot.sendVideo(userId,'https://www.youtube.com/watch?v=i8zi_bL3a2Q','https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=')
-  let data = await linebot.carouselTemplate(userId);
-  ctx.body = data;
+    //send sticker
+    // let data = await linebot.sendText(userId,"apple");
+    //let data = await linebot.sendSticker(userId,2,35);
+    // let data = await linebot.sendImage(userId,"https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=","https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=")
+    // let data = await linebot.sendVideo(userId,'https://www.youtube.com/watch?v=i8zi_bL3a2Q','https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=')
+    let data = await linebot.carouselTemplate(userId);
+    ctx.body = data;
 });
 
 router.get('/carouselTemplate',async (ctx) => {
-  let altText = '選單開啟';
-  let thumbnailImageUrl = 'https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=';
-  let title = 'this is menu';
-  let text = 'description';
-  let defaultAction = {
-                        "type": "uri",
-                        "label": "View detail",
-                        "uri": "https://developers.line.me/en/docs/messaging-api/reference/#image"
-                      };
-  let actions = [
-                  {
-                    "type": "postback",
-                    "label": "Buy",
-                    "data":"action=buy&itemid=111",
-                    "text": "Buy"
-                  },
-                  {
-                    "type": "postback",
-                    "label": "Add to cart",
-                    "data":"action=buy&itemid=111",
-                    "text": "Add"
-                  },
-                  {
-                    "type": "uri",
-                    "label": "View detail",
-                    "uri": "https://developers.line.me/en/docs/messaging-api/reference/#image"
-                  }
-                ];
-  let data = await linebot.carouselTemplate(userId,altText,thumbnailImageUrl,title,text,defaultAction,actions);
-  ctx.body = data;
+    let altText = '選單開啟';
+    let thumbnailImageUrl = 'https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=';
+    let title = 'this is menu';
+    let text = 'description';
+    let defaultAction = {
+                         "type": "uri",
+                         "label": "View detail",
+                         "uri": "https://developers.line.me/en/docs/messaging-api/reference/#image"
+                       };
+    let actions = [
+                   {
+                     "type": "postback",
+                     "label": "Buy",
+                     "data":"action=buy&itemid=111",
+                     "text": "Buy"
+                    },
+                   {
+                     "type": "postback",
+                     "label": "Add to cart",
+                     "data":"action=buy&itemid=111",
+                     "text": "Add"
+                    },
+                   {
+                     "type": "uri",
+                     "label": "View detail",
+                     "uri": "https://developers.line.me/en/docs/messaging-api/reference/#image"
+                    }
+                  ];
+    let data = await linebot.carouselTemplate(userId,altText,thumbnailImageUrl,title,text,defaultAction,actions);
+    ctx.body = data;
 })
 
 app
