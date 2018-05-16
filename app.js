@@ -70,41 +70,76 @@ router.get('/test',async (ctx) => {
     // let data = await linebot.sendText(userId,"apple");
     //let data = await linebot.sendSticker(userId,2,35);
     // let data = await linebot.sendImage(userId,"https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=","https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=")
-    // let data = await linebot.sendVideo(userId,'https://www.youtube.com/watch?v=i8zi_bL3a2Q','https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=')
-    let data = await linebot.carouselTemplate(userId);
+    let data = await linebot.sendVideo(userId,'https://www.youtube.com/watch?v=i8zi_bL3a2Q','https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=')
     ctx.body = data;
 });
 
 router.get('/carouselTemplate',async (ctx) => {
     let altText = '選單開啟';
-    let thumbnailImageUrl = 'https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=';
-    let title = 'this is menu';
-    let text = 'description';
-    let defaultAction = {
+    let thumbnailImageUrl1 = 'https://media.istockphoto.com/photos/grey-squirrel-yawning-picture-id473012660?k=6&m=473012660&s=612x612&w=0&h=opzkOsCuudeI_l83My-WdfTiru2mpuwZMpVomymwC9c=';
+    let thumbnailImageUrl2 = 'https://cdn.free.com.tw/blog/wp-content/uploads/2014/08/Placekitten480-g.jpg'; 
+    let imageBackgroundColor1 = "#FFFFFF";
+    let imageBackgroundColor2 = "#FFFFFF";
+    let title1 = 'this is menu1';
+    let title2 = 'this is menu2';    
+    let text1 = 'description1';
+    let text2 = 'description2';    
+    let defaultAction1 = {
                          "type": "uri",
                          "label": "View detail",
                          "uri": "https://developers.line.me/en/docs/messaging-api/reference/#image"
                        };
-    let actions = [
+    let actions1 = [
                    {
                      "type": "postback",
-                     "label": "Buy",
+                     "label": "Buy1",
                      "data":"action=buy&itemid=111",
                      "text": "Buy"
                     },
                    {
                      "type": "postback",
-                     "label": "Add to cart",
+                     "label": "Add to cart1",
                      "data":"action=buy&itemid=111",
                      "text": "Add"
                     },
                    {
                      "type": "uri",
-                     "label": "View detail",
+                     "label": "View detail1",
                      "uri": "https://developers.line.me/en/docs/messaging-api/reference/#image"
                     }
                   ];
-    let data = await linebot.carouselTemplate(userId,altText,thumbnailImageUrl,title,text,defaultAction,actions);
+    let defaultAction2 = {
+                    "type": "uri",
+                    "label": "View detail",
+                    "uri": "https://developers.line.me/en/docs/messaging-api/reference/#image"
+                  };
+    let actions2 = [
+              {
+                "type": "postback",
+                "label": "Buy2",
+                "data":"action=buy&itemid=111",
+                "text": "Buy"
+               },
+              {
+                "type": "postback",
+                "label": "Add to cart2",
+                "data":"action=buy&itemid=111",
+                "text": "Add"
+               },
+              {
+                "type": "uri",
+                "label": "View detail2",
+                "uri": "https://developers.line.me/en/docs/messaging-api/reference/#image"
+               }
+             ];
+    let data = await linebot.carouselTemplate(userId,
+                                              altText,
+                                              [thumbnailImageUrl1,thumbnailImageUrl2],
+                                              [imageBackgroundColor1,imageBackgroundColor2],
+                                              [title1,title2],
+                                              [text1,text2],
+                                              [defaultAction1,defaultAction2],
+                                              [actions1,actions2]);
     ctx.body = data;
 })
 
