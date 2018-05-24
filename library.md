@@ -39,14 +39,24 @@ router.post('/webhooks',async (ctx) => {
 分解ctx.request.body.events
 ```
 return Object
-{
-  'replyToken' : replyToken, @string
-  'type' : type, @string
-  'sourceType' : sourceType, @string
-  'sourceUserId' : sourceUserId, @string
-  'messageType' : messageType, @string
-  'messageText' : messageText @string
-}
+  message:
+    {
+      'type' : type, @string
+      'replyToken' : replyToken, @string
+      'sourceUserId' : sourceUserId, @string
+      'sourceType' : sourceType, @string
+      'messageType' : messageType, @string
+      'messageText' : messageText @string
+    }
+
+    postback:
+    {
+      'type' : type, @string
+      'replyToken' : replyToken, @string
+      'sourceUserId' : sourceUserId, @string
+      'sourceType' : sourceType, @string
+      'postbackData' : postbackData, @string
+    }
 ```
 ``` javascript
 router.post('/webhooks',async (ctx) => {
