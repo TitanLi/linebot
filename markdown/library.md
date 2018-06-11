@@ -26,6 +26,10 @@ const router = Router();
 app
   .use(linebot.middleware())
   .use(router.routes());
+
+app.listen(3000, function() {
+  console.log("App now running on 3000 port");
+});
 ```
 ***
 ## line developers
