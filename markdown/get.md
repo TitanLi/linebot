@@ -16,3 +16,10 @@ router.get('/getProfile',async (ctx) => {
     ctx.body = getProfile;
 });
 ```
+userId取得方式
+```javascript
+router.post('/webhooks',async (ctx) => {
+    let events = linebot.requestHandle(ctx);
+    userId = events.sourceUserId;
+});
+```
