@@ -85,6 +85,13 @@ router.get('/richmenutouser',async (ctx) => {
     ctx.body = linkRichMenuToUser;
 });
 ```
+userId取得方式
+```javascript
+router.post('/webhooks',async (ctx) => {
+    let events = linebot.requestHandle(ctx);
+    userId = events.sourceUserId;
+});
+```
 
 ***
 ## get rich menu list
