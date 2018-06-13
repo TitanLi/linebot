@@ -10,13 +10,20 @@
 **return** request-promise
 
 **success response**  {}
-
 ``` javascript
 router.get('/send',async (ctx) => {
   let data = await linebot.sendText(userId,text);
   ctx.body = data;
 });
 ```
+userId取得方式
+```javascript
+router.post('/webhooks',async (ctx) => {
+    let events = linebot.requestHandle(ctx);
+    userId = events.sourceUserId;
+});
+```
+
 ***
 ## send sticker
 [sticker_list]( https://developers.line.me/media/messaging-api/sticker_list.pdf)
@@ -37,6 +44,14 @@ router.get('/send',async (ctx) => {
     ctx.body = data;
 });
 ```
+userId取得方式
+```javascript
+router.post('/webhooks',async (ctx) => {
+    let events = linebot.requestHandle(ctx);
+    userId = events.sourceUserId;
+});
+```
+
 ***
 ## send image
 | property            | Type   | Description       |
@@ -55,6 +70,15 @@ router.get('/send',async (ctx) => {
     ctx.body = data;
 });
 ```
+userId取得方式
+```javascript
+router.post('/webhooks',async (ctx) => {
+    let events = linebot.requestHandle(ctx);
+    userId = events.sourceUserId;
+});
+```
+
+
 ***
 ## send video
 | property            | Type   | Description       |
@@ -74,6 +98,15 @@ router.get('/send',async (ctx) => {
 });
 
 ```
+userId取得方式
+```javascript
+router.post('/webhooks',async (ctx) => {
+    let events = linebot.requestHandle(ctx);
+    userId = events.sourceUserId;
+});
+```
+
+
 ***
 ## send carousel template
 | property              | Type   | Description |
@@ -177,4 +210,11 @@ router.get('/sendCarouselTemplate',async (ctx) => {
                                                   [actions1,actions2]);
     ctx.body = data;
 })
+```
+userId取得方式
+```javascript
+router.post('/webhooks',async (ctx) => {
+    let events = linebot.requestHandle(ctx);
+    userId = events.sourceUserId;
+});
 ```
