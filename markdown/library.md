@@ -5,7 +5,8 @@
 * ``request``
 * ``request-promise``
 * ``fs``
-
+* ``需將lib資料夾及.env檔案複製至專案目錄之下，並更改.env（channelSecret、lineBotToken)``
+* ``將package.json dependencies 所需套件及版本複製至專案內部的package.json``
 
 使用方法
 ``` javascript
@@ -13,22 +14,32 @@ const lineBot = require('./lib/linebot.js');
 const linebot = new lineBot(channelSecret,lineBotToken);
 ```
 
-
-Middleware
+koa2 Middleware
 ``` javascript
 const koa = require('koa');
 const Router = require('koa-router');
-const lineBot = require('./lib/linebot.js');
-const linebot = new lineBot(channelSecret,lineBotToken);
+const bodyParser = require('koa-bodyparser');
+//使用.env檔的參數
+const dotenv = require('dotenv').load();
+const Linebot = require('./lib/linebot.js');
+const linebot = new Linebot(process.env.channelSecret,process.env.lineBotToken);
+
 const app = new koa();
 const router = Router();
+
+app.use(bodyParser());
+
+router.post('/webhooks',async (ctx, next) => {
+
+});
 
 app
   .use(linebot.middleware())
   .use(router.routes());
 
-app.listen(3000, function() {
-  console.log("App now running on 3000 port");
+var server = app.listen(process.env.PORT || 8080, function() {
+    var port = server.address().port;
+      console.log("App now running on port", port);
 });
 ```
 ***
