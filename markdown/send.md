@@ -32,7 +32,7 @@ router.post('/webhooks',async (ctx) => {
 | -----------|:------:| :-----------|
 | userId     | String | user id     |
 | packageId  | Int    | STKPKGID    |
-| stickerId  | Int    | stickerId   |
+| stickerId  | Int    | STKID       |
 
 **return** request-promise
 
