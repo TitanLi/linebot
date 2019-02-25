@@ -250,7 +250,41 @@ router.post('/webhooks',async (ctx) => {
 example
 ```javascript
 router.get('/send',async (ctx) => {
-    let data = await linebot.sendLocationMessage('U1381970a8501d2c5905d584ae4afb34c','國立臺中科技大學','台中市北區三民路三段129號',24.1496878,120.6817857);
+    let data = await linebot.sendLocationMessage(USER_ID,'國立臺中科技大學','台中市北區三民路三段129號',24.150075,120.683921);
+    ctx.body = data;
+});
+```
+
+***
+
+## send confirm template
+| property              | Type   | Description |
+| ----------------------|:------:| :-----------|
+| userId                | String | user id     |
+| altText               | String | alt text    |
+| text                  | String | message     |
+
+**return** request-promise
+
+**success response** {}
+
+```javascript
+router.get('/send',async (ctx) => {
+  let data = await linebot.sendConfirmTemplate(userId,altText,text);
+  ctx.body = data;
+});
+```
+userId取得方式
+```javascript
+router.post('/webhooks',async (ctx) => {
+    let events = linebot.requestHandle(ctx);
+    userId = events.sourceUserId;
+});
+```
+example
+```javascript
+router.get('/send',async (ctx) => {
+    let data = await linebot.sendConfirmTemplate(USER_ID,'購買詢問','確定要購買嗎？');
     ctx.body = data;
 });
 ```
