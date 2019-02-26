@@ -220,6 +220,79 @@ router.post('/webhooks',async (ctx) => {
 ```
 
 ***
+## send image carousel template
+| property              | Type   | Description |
+| ----------------------|:------:| :-----------|
+| userId                | String | user id     |
+| altText               | String | user received message    |
+| imageUrl     | Object | user received image url<br>-Image URL (Max: 1000 characters)<br>-HTTPS<br>-JPEG or PNG<br>-Aspect ratio: 1:1.51<br>-Max width: 1024px<br>-Max: 1 MB|
+| action                | Object | {
+                                      "type": "postback",
+                                      "label": "Buy",
+                                      "data": "action=buy&itemid=111"
+                                    }
+
+                                    {
+                                      "type": "message",
+                                      "label": "Yes",
+                                      "text": "yes"
+                                    }
+
+                                    {
+                                      "type": "uri",
+                                      "label": "View detail",
+                                      "uri": "http://example.com/page/222"
+                                    }   |
+
+**return** request-promise
+
+**success response** {}
+
+#### use:
+```javascript
+router.get('/sendCarouselTemplate',async (ctx) => {
+    let data = await linebot.sendCarouselTemplate(userId,
+                                                  altText,
+                                                  [imageUrl1,imageUrl2],
+                                                  [actionObject1,actionObject2]);
+    ctx.body = data;
+})
+```
+
+#### example:
+```javascript
+router.get('/',async (ctx) => {
+    let data = await linebot.sendImageCarouselTemplate(
+      userId,
+      'image carousel template',
+      ['https://i.imgur.com/9MnIR3R.png','https://i.imgur.com/slkvDvQ.jpg','https://i.imgur.com/W4tV1PY.png'],
+      [{
+        "type": "postback",
+        "label": "Buy",
+        "data": "action=buy&itemid=111"
+      },
+      {
+        "type": "message",
+        "label": "Yes",
+        "text": "yes"
+      },
+      {
+        "type": "uri",
+        "label": "View detail",
+        "uri": "https://hackmd.io/FoYeXL5aTWaAhkOwE3G0uQ"
+      }]);
+    ctx.body = data+'\n'+test;
+});
+```
+userId取得方式
+```javascript
+router.post('/webhooks',async (ctx) => {
+    let events = linebot.requestHandle(ctx);
+    userId = events.sourceUserId;
+});
+```
+
+***
 
 ## send location message
 | property              | Type   | Description |
