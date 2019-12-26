@@ -56,22 +56,38 @@ const lineBotToken = process.env.lineBotToken;
 
 app.use(bodyParser());
 
-router.post('/webhooks',async (ctx, next) => {
+router.post('/webhooks', async (ctx, next) => {
 
 });
 
 app
-  .use(linebot.middleware(channelSecret))
-  .use(router.routes());
+    .use(linebot.middleware(channelSecret))
+    .use(router.routes());
 
-const server = app.listen(process.env.PORT || 8080, function() {
+const server = app.listen(process.env.PORT || 8080, function () {
     const port = server.address().port;
-        console.log("App now running on port", port);
+    console.log("App now running on port", port);
 });
 ```
 
 ## 功能
-### 1. confirm
+### 1. auto response text
+<img src="https://github.com/TitanLi/linebot/blob/master/public/picture/IMG_A64F5F3C7DE8-1.jpeg" height="200px" alt="LINE auto response text" >
+
+#### example
+```javascript
+const responseText = require('./lib/example/responseText.js');
+router.post('/webhooks', async (ctx, next) => {
+    let events = ctx.request.body.events;
+    data = await responseText.responseText(events, lineBotToken, {
+        '哈囉': '你好阿',
+        '晚安': '晚安'
+    });
+    ctx.body = data;
+});
+```
+
+### 2. confirm
 <img src="https://github.com/TitanLi/linebot/blob/master/public/picture/IMG_2699.PNG" height="400px" alt="LINE confirm" >
 
 #### example

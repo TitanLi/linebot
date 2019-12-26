@@ -12,15 +12,15 @@ const lineBotToken = process.env.lineBotToken;
 
 app.use(bodyParser());
 
-router.post('/webhooks',async (ctx, next) => {
+router.post('/webhooks', async (ctx, next) => {
 
 });
 
 app
-  .use(linebot.middleware(channelSecret))
-  .use(router.routes());
+    .use(linebot.middleware(channelSecret))
+    .use(router.routes());
 
-const server = app.listen(process.env.PORT || 8080, function() {
+const server = app.listen(process.env.PORT || 8080, function () {
     const port = server.address().port;
-        console.log("App now running on port", port);
+    console.log("App now running on port", port);
 });
