@@ -72,7 +72,7 @@ const server = app.listen(process.env.PORT || 8080, function () {
 
 ## 功能
 ### 1. auto response text
-<img src="https://github.com/TitanLi/linebot/blob/master/public/picture/IMG_A64F5F3C7DE8-1.jpeg" height="200px" alt="LINE auto response text" >
+<img src="https://github.com/TitanLi/linebot/blob/master/public/picture/IMG_A64F5F3C7DE8-1.jpeg" height="280px" alt="LINE auto response text" >
 
 #### example
 ```javascript
@@ -87,7 +87,22 @@ router.post('/webhooks', async (ctx, next) => {
 });
 ```
 
-### 2. confirm
+### 2. sticker
+[sticker list](https://developers.line.biz/media/messaging-api/sticker_list.pdf)
+
+<img src="https://github.com/TitanLi/linebot/blob/master/public/picture/IMG_422AD9B694D9-1.jpeg" height="280px" alt="LINE sticker" >
+
+#### example
+```javascript
+const sticker = require('./lib/example/sticker.js');
+router.post('/webhooks', async (ctx, next) => {
+    let events = ctx.request.body.events;
+    data = await sticker.sticker(events, lineBotToken, 11537, 52002734);
+    ctx.body = data;
+});
+```
+
+### 3. confirm
 <img src="https://github.com/TitanLi/linebot/blob/master/public/picture/IMG_2699.PNG" height="400px" alt="LINE confirm" >
 
 #### example
