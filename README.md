@@ -108,7 +108,7 @@ router.post('/webhooks', async (ctx, next) => {
 | originalContentUrl  | https images url<br>Max: 4096 x 4096<br>Max: 1 MB|
 | previewImageUrl     | https images url<br>Max: 240 x 240<br>Max: 1 MB  |
 
-<img src="https://github.com/TitanLi/linebot/blob/master/public/picture/d7bdff20.png" height="280px" alt="LINE image" >
+<img src="https://github.com/TitanLi/linebot/blob/master/public/picture/IMG_1E2E60C1E1A9-1.jpeg" height="280px" alt="LINE image" >
 
 #### example
 ```javascript
