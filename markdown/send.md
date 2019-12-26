@@ -18,66 +18,12 @@ router.get('/send',async (ctx) => {
 ```
 userId取得方式
 ```javascript
-router.post('/webhooks',async (ctx) => {
-    let events = linebot.requestHandle(ctx);
-    userId = events.sourceUserId;
+router.post('/webents = linebot.requestHandle(ctx);
+    usehooks',async (ctx) => {
+    let evrId = events.sourceUserId;
 });
 ```
 
-***
-## send sticker
-[sticker_list]( https://developers.line.me/media/messaging-api/sticker_list.pdf)
-
-| property   | Type   | Description |
-| -----------|:------:| :-----------|
-| userId     | String | user id     |
-| packageId  | Int    | STKPKGID    |
-| stickerId  | Int    | STKID       |
-
-**return** request-promise
-
-**success response** {}
-
-```javascript
-router.get('/send',async (ctx) => {
-    let data = await linebot.sendSticker(userId,packageId,stickerId);
-    ctx.body = data;
-});
-```
-userId取得方式
-```javascript
-router.post('/webhooks',async (ctx) => {
-    let events = linebot.requestHandle(ctx);
-    userId = events.sourceUserId;
-});
-```
-
-***
-## send image
-| property            | Type   | Description       |
-| --------------------|:------:| :-----------------|
-| userId              | String | user id           |
-| originalContentUrl  | Int    | https images url<br>JPEG<br>Max: 1024 x 1024<br>Max: 1 MB|
-| previewImageUrl     | Int    | https images url<br>JPEG<br>Max: 240 x 240<br>Max: 1 MB  |
-
-**return** request-promise
-
-**success response** {}
-
-```javascript
-router.get('/send',async (ctx) => {
-    let data = await linebot.sendImage(userId,originalContentUrl,previewImageUrl);
-    ctx.body = data;
-});
-```
-userId取得方式
-```javascript
-router.post('/webhooks',async (ctx) => {
-    let events = linebot.requestHandle(ctx);
-    userId = events.sourceUserId;
-});
-```
-***
 ### send imagemap(開發中)
 
 ***

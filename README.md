@@ -102,15 +102,33 @@ router.post('/webhooks', async (ctx, next) => {
 });
 ```
 
-### 3. confirm
-<img src="https://github.com/TitanLi/linebot/blob/master/public/picture/IMG_2699.PNG" height="400px" alt="LINE confirm" >
+### 3. image
+| property            | Description       |
+| --------------------| :-----------------|
+| originalContentUrl  | https images url<br>Max: 4096 x 4096<br>Max: 1 MB|
+| previewImageUrl     | https images url<br>Max: 240 x 240<br>Max: 1 MB  |
+
+<img src="https://github.com/TitanLi/linebot/blob/master/public/picture/d7bdff20.png" height="280px" alt="LINE image" >
+
+#### example
+```javascript
+const image = require('./lib/example/image.js');
+router.post('/webhooks', async (ctx, next) => {
+    let events = ctx.request.body.events;
+    data = await image.image(events, lineBotToken, "https://i.imgur.com/slkvDvQ.jpg", "https://i.imgur.com/8206ST0.png");
+    ctx.body = data;
+});
+```
+
+### 4. confirm
+<img src="https://github.com/TitanLi/linebot/blob/master/public/picture/IMG_044DA4F3AA26-1.jpeg" height="280px" alt="LINE confirm" >
 
 #### example
 ```javascript
 const confirm = require('./lib/example/confirm.js');
 router.post('/webhooks',async (ctx, next) => {
-    let replyToken = ctx.request.body.events[0].replyToken;
-    data = await confirm.confirm(replyToken,lineBotToken);
+    let events = ctx.request.body.events;
+    data = await confirm.confirm(events,lineBotToken);
     ctx.body = data;
 });
 ```
