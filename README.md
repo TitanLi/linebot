@@ -71,8 +71,10 @@ const server = app.listen(process.env.PORT || 8080, function() {
 ```
 
 ## 功能
-### confirm
+### 1. confirm
 <img src="https://github.com/TitanLi/linebot/blob/master/public/picture/IMG_2699.PNG" height="400px" alt="LINE confirm" >
+
+example
 ```javascript
 const confirm = require('./lib/example/confirm.js');
 router.post('/webhooks',async (ctx, next) => {
