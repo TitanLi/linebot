@@ -69,3 +69,15 @@ const server = app.listen(process.env.PORT || 8080, function() {
         console.log("App now running on port", port);
 });
 ```
+
+## 功能
+### confirm
+![LINE confirm](https://github.com/TitanLi/linebot/blob/master/public/picture/IMG_2699.PNG)
+```javascript
+const confirm = require('./lib/example/confirm.js');
+router.post('/webhooks',async (ctx, next) => {
+    let replyToken = ctx.request.body.events[0].replyToken;
+    data = await confirm.confirm(replyToken,lineBotToken);
+    ctx.body = data;
+});
+```
