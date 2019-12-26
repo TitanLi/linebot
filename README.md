@@ -1,17 +1,71 @@
 # linebot
+> 若要使用library請使用Branch:stable/linebot-library
 
 API模式：
-* Developer trial帳號可免費使用Reply API與Push API（目前採用測試）
-* 其餘開啟API功能的LINE@帳號皆可免費使用Reply API
-
 ![LINE Developers](https://github.com/TitanLi/linebot/blob/master/public/picture/d7bdff20.png)
 
-[LINE library step](https://github.com/TitanLi/linebot/blob/master/markdown/library.md)
+## Send push message API
+> POST https://api.line.me/v2/bot/message/push
 
-[LINE library response use](https://github.com/TitanLi/linebot/blob/master/markdown/response.md)
+## Send reply message
+> POST https://api.line.me/v2/bot/message/reply
 
-[LINE library send use](https://github.com/TitanLi/linebot/blob/master/markdown/send.md)
+## webhooks body
+```javascript
+[ 
+    { 
+        "type": "message",
+        "replyToken": "2dd9d92d08204ab6b5628d95d49abebc",
+        "source": { 
+            "userId": "Ue1ed1792dfbdbd4ed43f91ad295apple",
+            "type": "user" 
+            },
+        "timestamp": 1577346740883,
+        "mode": "active",
+        "message": { 
+            "type": "text", 
+            "id": "11148713329452", 
+            "text": "apple" 
+            } 
+    }
+]
+```
 
-[LINE library rich use](https://github.com/TitanLi/linebot/blob/master/markdown/rich.md)
+## 使用Koa2建立LINE-Bot Server
+所需套件
+* ``crypto``
+* ``request``
+* ``request-promise``
+* ``fs``
+* ``需將lib資料夾及.env檔案複製至專案目錄之下，並更改.env（channelSecret、lineBotToken)``
+* ``將package.json dependencies 所需套件及版本複製至專案內部的package.json``
 
-[LINE library get](https://github.com/TitanLi/linebot/blob/master/markdown/get.md)
+koa2 framework 建立Server 並加入LINE-Bot Middleware
+``` javascript
+const koa = require('koa');
+const Router = require('koa-router');
+const bodyParser = require('koa-bodyparser');
+//使用.env檔的參數
+const dotenv = require('dotenv').load();
+const linebot = require('./lib/linebot.js');
+
+const app = new koa();
+const router = Router();
+const channelSecret = process.env.channelSecret;
+const lineBotToken = process.env.lineBotToken;
+
+app.use(bodyParser());
+
+router.post('/webhooks',async (ctx, next) => {
+
+});
+
+app
+  .use(linebot.middleware(channelSecret))
+  .use(router.routes());
+
+const server = app.listen(process.env.PORT || 8080, function() {
+    const port = server.address().port;
+        console.log("App now running on port", port);
+});
+```
