@@ -1,28 +1,6 @@
 # send
 `userId` 可以在 post /webhooks ctx.request.body.events.source.userId 取得
 ***
-## send text
-| property   | Type   | Description |
-| -----------|:------:| :-----------|
-| userId     | String | user id     |
-| text       | String | message     |
-
-**return** request-promise
-
-**success response**  {}
-``` javascript
-router.get('/send',async (ctx) => {
-  let data = await linebot.sendText(userId,text);
-  ctx.body = data;
-});
-```
-userId取得方式
-```javascript
-router.post('/webents = linebot.requestHandle(ctx);
-    usehooks',async (ctx) => {
-    let evrId = events.sourceUserId;
-});
-```
 
 ### send imagemap(開發中)
 

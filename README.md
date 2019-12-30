@@ -132,3 +132,23 @@ router.post('/webhooks',async (ctx, next) => {
     ctx.body = data;
 });
 ```
+
+### 5. richMenu
+<img src="https://github.com/TitanLi/linebot/blob/master/public/picture/IMG_4970D88149DE-1.jpeg" height="400px" alt="LINE confirm" >
+
+#### example
+```javascript
+const richMenu = require('./lib/example/richMenu.js');
+router.get('/create', async (ctx) => {
+    //create rich menu
+    let createDefaultRichMenu = await richMenu.createRichMenu(lineBotToken);
+    let richMenuId = createDefaultRichMenu.richMenuId;
+    console.log(richMenuId);
+    // upload rich menu image
+    let uploadRichMenuImageData = await richMenu.uploadRichMenuImage(richMenuId, `${__dirname}/public/img/test.png`, lineBotToken);
+    console.log(uploadRichMenuImageData);
+    // Set default rich menu
+    let setDefaultRichMenuData = await richMenu.setDefaultRichMenu(richMenuId, lineBotToken);
+    ctx.body = setDefaultRichMenuData;
+});
+```
